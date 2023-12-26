@@ -64,7 +64,7 @@ const signin = AsyncHandler(async (req, res, next) => {
       const accessToken = user.createJWT();
       const { password, ...otherInfo } = user._doc;
       res
-        .cookie("access-token", accessToken, {
+        .cookie("access_token", accessToken, {
           httpOnly: true,
         })
         .status(StatusCodes.OK)
