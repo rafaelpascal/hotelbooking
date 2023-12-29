@@ -32,7 +32,7 @@ const VerifyToken = (req, res, next) => {
 
 // VerifyUser
 const VerifUser = (req, res, next) => {
-  VerifyToken(req, res, () => {
+  VerifyToken(req, res, next, () => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
       next();
     } else {
@@ -43,7 +43,24 @@ const VerifUser = (req, res, next) => {
   });
 };
 
+// Verify Admin
+const VerifAdmin = (req, res, next) => {
+  VerifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      return next(
+        new ErrorHandler(
+          `You are not an Admin, Not Authorized`,
+          StatusCodes.UNAUTHORIZED
+        )
+      );
+    }
+  });
+};
+
 module.exports = {
   VerifyToken,
   VerifUser,
+  VerifAdmin,
 };

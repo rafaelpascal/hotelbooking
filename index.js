@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connect = require("../api/connectDB/DBconnect");
 const Authroute = require("./routes/auth");
 const Hotelroute = require("./routes/hotels");
+const Roomsroute = require("./routes/rooms");
 const Userroute = require("./routes/users");
 const customError = require("./utils/customError");
 const globalErrorHandler = require("./utils/globalErrorHandler");
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/auth", Authroute);
 app.use("/api/hotel", Hotelroute);
 app.use("/api/user", Userroute);
+app.use("/api/room", Roomsroute);
 
 //ERROR IF ROUTE DONT EXIST IN SERVER
 app.all("*", (req, res, next) => {
